@@ -13,6 +13,7 @@ export class BookService {
     // console.log("createdBook: ", createdBook);
     // return createdBook;
 
+    
     const {name, author, title, tags} = createBookDto;
     const newBook = new this.bookModel({
       name,
@@ -30,12 +31,23 @@ export class BookService {
     return data
   }
 
-  findOne(id: string, ) {
-    return this.bookModel.findById(id)
+  async findOne(id: string, ) {
+    const result =  await this.bookModel.findById(id);
+    if(!result) return "Book not found";
+    return result
   }
 
-  update(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+  async updateBook(id: string, updateBookDto: UpdateBookDto) {
+    const {name, author, title, tags} = updateBookDto;
+    
+    const result = await this.bookModel.findByIdAndUpdate(id,{
+      name,
+      author,
+      title,
+      tags
+    } )
+    
+    return result
   }
 
   remove(id: number) {

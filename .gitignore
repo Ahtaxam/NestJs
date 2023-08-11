@@ -2,6 +2,9 @@
 /dist
 /node_modules
 
+.local.env
+package-lock.json
+
 # Logs
 logs
 *.log
